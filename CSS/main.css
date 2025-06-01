@@ -240,16 +240,22 @@ form button {
     min-width: 100px;
 }
 
+
 #myUnOrdList {
     display: flex;
     justify-content: center;
     align-items: center;
+    align-items: flex-start; 
     max-width: 1200px;
+    height: 360px;           
+    overflow-y: auto;         
+    scrollbar-width: thin;         
+    scrollbar-color: transparent transparent;  
 }
 
 .todo-list {
     min-width: 25%;
-    overflow: hidden;
+    overflow-y: auto;
     /* To remove the bullets of unordered list */
     list-style: none;
 }
