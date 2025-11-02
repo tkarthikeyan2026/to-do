@@ -6,6 +6,12 @@ const toDoList = document.querySelector('.todo-list');
 const standardTheme = document.querySelector('.standard-theme');
 const lightTheme = document.querySelector('.light-theme');
 const darkerTheme = document.querySelector('.darker-theme');
+const todoInput = document.querySelector('.todo-input'); 
+const todoButton = document.querySelector('.todo-btn'); 
+const todoForm = document.querySelector('form'); 
+const todoList = document.querySelector('.todo-list'); 
+const totalTasksSpan = document.getElementById('total-tasks');
+const completedTasksSpan = document.getElementById('completed-tasks');
 
 
 // Event Listeners
@@ -201,3 +207,87 @@ function changeTheme(color) {
         });
     });
 }
+
+
+// Update Function Count Of Task
+function updateTaskCounters() {
+    // Element Inside The Count
+    const allTasks = todoList.children.length;
+
+    // completed Task
+    const completedTasks = todoList.querySelectorAll('.completed').length;
+
+    // Update Number On HTML
+    totalTasksSpan.innerText = allTasks;
+    completedTasksSpan.innerText = completedTasks;
+}
+
+// ----------------------------------------------------------------------
+
+// Call When Click On Button
+function addTodo(event) {
+
+    event.preventDefault(); 
+    // Check If The Input Is Empty
+    if (todoInput.value.trim() === "") {
+        // Message 
+        console.log("Must Write Some Task");
+        return; 
+    }
+
+    // create div 
+    const todoDiv = document.createElement('div');
+    todoDiv.classList.add('todo'); 
+
+    // create a text
+    const newTodo = document.createElement('li');
+    newTodo.innerText = todoInput.value;
+    todoDiv.appendChild(newTodo);
+
+    // (Check Button)
+    const completedButton = document.createElement('button');
+    completedButton.innerHTML = '<i class="fas fa-check"></i>';
+    completedButton.classList.add('complete-btn');
+    todoDiv.appendChild(completedButton);
+
+    // (Trash Button)
+    const trashButton = document.createElement('button');
+    trashButton.innerHTML = '<i class="fas fa-trash"></i>';
+    trashButton.classList.add('trash-btn');
+    todoDiv.appendChild(trashButton);
+
+    
+    todoList.appendChild(todoDiv);
+    
+    
+    todoInput.value = "";
+
+//    update count
+    updateTaskCounters(); 
+}
+
+// ----------------------------------------------------------------------
+
+
+function handleButtons(e) {
+    const item = e.target;
+    const todo = item.parentElement; 
+    if (item.classList.contains('trash-btn')) {
+        todo.classList.add('fall');
+        // DOM
+        todo.addEventListener('transitionend', function() {
+            todo.remove();
+            updateTaskCounters(); 
+        });
+    }
+    if (item.classList.contains('complete-btn')) {
+        todo.classList.toggle('completed'); 
+
+        updateTaskCounters(); 
+    }
+}
+todoForm.addEventListener('submit', addTodo);
+
+todoList.addEventListener('click', handleButtons);
+
+window.addEventListener('DOMContentLoaded', updateTaskCounters);
