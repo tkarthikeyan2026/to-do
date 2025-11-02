@@ -49,6 +49,34 @@ body {
     width: 100%;
 }
 
+/* Status div */
+
+#status-bar {
+    display: flex; 
+    justify-content: space-around; 
+    width: 40%; 
+    margin: 20px auto;
+    padding: 10px;
+    background-color: var(--secondary-color); 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+}
+
+#status-bar p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+#status-bar span {
+    color: var(--button-color);
+    font-size: 1.2rem;
+    margin-left: 5px;
+}
+
+
+
 /* Theme buttons div */
 .flexrow-container {
     align-items: center;
@@ -138,11 +166,11 @@ form {
 }
 
 form input {
-    padding: 10px;
+    padding:  10px;
     font-size: 17px;
     border: none;
     outline: none;
-    /* border-radius: 15; */
+    /* border-radius: 15px; */
     border-top-left-radius: 17px;
     border-bottom-left-radius: 17px;
     max-width: 500px;
@@ -154,11 +182,13 @@ form input {
 form input.standard-input {
     background-color: #181a1a;
     color: rgb(247, 226, 223);
+    padding: 13px 15px ;
 }
 
 
 form input.light-input {
     background-color: #AEB1B4;
+    color: #1a150e;
     color: #1a150e;
 }
 
@@ -174,7 +204,7 @@ form input.darker-input {
 
 form input.darker-input::placeholder {
     color: white;
-    opacity: 0.7;
+    opacity: 0.7;   
 }
 
 form input:hover {
@@ -258,7 +288,7 @@ form button {
     margin: 1rem;
     /* background: rgb(247, 226, 223); */
     /* color: black; */
-    font-size: 19px;
+    font-size: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -357,6 +387,15 @@ form button {
         max-width: 255px;
     }
 }
+/* add media for status-bar */
+@media(max-width:769px){
+
+    #status-bar{
+    width: 68%; 
+    margin: 20px auto;
+    padding: 10px ;
+}
+}
 
 @media only screen and (max-width: 400px) {
     form {
@@ -377,3 +416,4 @@ form button {
         box-shadow: 0 0 5px lightgray;
     }
 }
+
