@@ -24,6 +24,40 @@ savedTheme === null ?
     : changeTheme(localStorage.getItem('savedTheme'));
 
 // Functions;
+function addTask() {
+  const taskInput = document.getElementById("taskInput").value;
+  const priority = document.getElementById("priority").value;
+  const deadline = document.getElementById("deadline").value;
+
+  const task = {
+    text: taskInput,
+    priority: priority,
+    deadline: deadline,
+    completed: false
+  };
+
+  tasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  displayTasks();
+    tasks.forEach((task, index) => {
+  let li = document.createElement("li");
+
+  let deadlineText = task.deadline
+    ? new Date(task.deadline).toLocaleString()
+    : "No deadline";
+
+  li.textContent = `${task.text} | Due: ${deadlineText}`;
+
+  // Highlight overdue tasks
+  if (task.deadline && new Date(task.deadline) < new Date()) {
+    li.style.color = "red";
+    li.style.fontWeight = "bold";
+  }
+
+  list.appendChild(li);
+});
+}
 function addToDo(event) {
     // Prevents form from submitting / Prevents form from relaoding;
     event.preventDefault();
