@@ -24,6 +24,11 @@ savedTheme === null ?
     : changeTheme(localStorage.getItem('savedTheme'));
 
 // Functions;
+function clearAllTasks() {
+  tasks = [];
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  displayTasks();
+}
 function addToDo(event) {
     // Prevents form from submitting / Prevents form from relaoding;
     event.preventDefault();
