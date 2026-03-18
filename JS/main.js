@@ -1,4 +1,4 @@
-// Selectors
+// Selectors 
 
 const toDoInput = document.querySelector('.todo-input');
 const toDoBtn = document.querySelector('.todo-btn');
@@ -50,11 +50,14 @@ function addToDo(event) {
         const checked = document.createElement('button');
         checked.innerHTML = '<i class="fas fa-check"></i>';
         checked.classList.add('check-btn', `${savedTheme}-button`);
+        checked.title = "Mark task as completed"; // <-- hover label added
         toDoDiv.appendChild(checked);
+
         // delete btn;
         const deleted = document.createElement('button');
         deleted.innerHTML = '<i class="fas fa-trash"></i>';
         deleted.classList.add('delete-btn', `${savedTheme}-button`);
+        deleted.title = "Delete task"; // <-- hover label added
         toDoDiv.appendChild(deleted);
 
         // Append to list;
@@ -140,11 +143,14 @@ function getTodos() {
         const checked = document.createElement('button');
         checked.innerHTML = '<i class="fas fa-check"></i>';
         checked.classList.add("check-btn", `${savedTheme}-button`);
+        checked.title = "Mark task as completed"; // <-- hover label added
         toDoDiv.appendChild(checked);
+
         // delete btn;
         const deleted = document.createElement('button');
         deleted.innerHTML = '<i class="fas fa-trash"></i>';
         deleted.classList.add("delete-btn", `${savedTheme}-button`);
+        deleted.title = "Delete task"; // <-- hover label added
         toDoDiv.appendChild(deleted);
 
         // Append to list;
