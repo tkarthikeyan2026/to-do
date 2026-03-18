@@ -201,3 +201,7 @@ function changeTheme(color) {
         });
     });
 }
+function clearAllTasks() {
+  localStorage.clear(); // clears all saved tasks
+  location.reload();    // refreshes the page
+}
