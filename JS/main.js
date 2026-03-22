@@ -140,11 +140,13 @@ function getTodos() {
         const checked = document.createElement('button');
         checked.innerHTML = '<i class="fas fa-check"></i>';
         checked.classList.add("check-btn", `${savedTheme}-button`);
+        checked.title= "mark as completed"
         toDoDiv.appendChild(checked);
         // delete btn;
         const deleted = document.createElement('button');
         deleted.innerHTML = '<i class="fas fa-trash"></i>';
         deleted.classList.add("delete-btn", `${savedTheme}-button`);
+        deleted.title= "Delete task"
         toDoDiv.appendChild(deleted);
 
         // Append to list;
@@ -201,3 +203,48 @@ function changeTheme(color) {
         });
     });
 }
+function updateTaskCounter() {
+    // Select all tasks in the list
+    const tasks = document.querySelectorAll('.todo-list li');
+    let remaining = 0;
+
+    // Count tasks that are not completed
+    tasks.forEach(task => {
+        if (!task.classList.contains('completed')) {
+            remaining++;
+        }
+    });
+
+    // Update the counter in HTML
+    document.getElementById('task-counter').textContent = "Tasks Remaining: " + remaining;
+}
+
+// Call this on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateTaskCounter();
+});
+
+// Example: Update counter whenever a task is clicked to mark complete
+document.querySelector('.todo-list').addEventListener('click', (e) => {
+    if (e.target.tagName === 'LI') {
+        e.target.classList.toggle('completed'); // toggle completed class
+        updateTaskCounter(); // update counter
+    }
+});
+// Task Search Feature
+const searchInput = document.getElementById('search-task');
+
+searchInput.addEventListener('keyup', function () {
+    const searchValue = searchInput.value.toLowerCase();
+    const tasks = document.querySelectorAll('.todo-list li');
+
+    tasks.forEach(task => {
+        const text = task.textContent.toLowerCase();
+
+        if (text.includes(searchValue)) {
+            task.style.display = "block";
+        } else {
+            task.style.display = "none";
+        }
+    });
+});
