@@ -20,7 +20,7 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'ASP-pipeline1-8cc7'
+    azureSubscription: 'Azure-WebApp-Connection'
     appType: 'webAppLinux'
-    appName: 'webdemo2hellodev--appname'
+    appName: 'webdemo2hellodev'
     package: '$(Build.ArtifactStagingDirectory)/ToDoList.zip'
