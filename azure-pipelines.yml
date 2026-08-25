@@ -1,8 +1,3 @@
-# HTML
-# Archive your static HTML project and save it with the build record.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - master
 
@@ -12,6 +7,20 @@ pool:
 steps:
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(build.sourcesDirectory)'
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
     includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/ToDoList.zip'
+    replaceExistingArchive: true
+
 - task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/ToDoList.zip'
+    ArtifactName: 'drop'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'ASP-pipeline1-8cc7'
+    appType: 'webAppLinux'
+    appName: 'webdemo2hellodev--appname'
+    package: '$(Build.ArtifactStagingDirectory)/ToDoList.zip'
